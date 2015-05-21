@@ -1,8 +1,15 @@
 CXX = g++ -g
 LIBGLUT = -lGL -lGLU -lglut
+INCLUDE = ./include
+LIB_O = ./lib/JLXLCD.o
 
 
+.PHONY: default
 
-.PHONY: ./main.o
-./main.o: ./main.cpp
-	$(CXX) $< -o $@ $(LIBGLUT)
+default: ./bin/main.o
+
+./bin/main.o: ./src/main.cpp ./lib/JLXLCD.o
+	$(CXX) -I$(INCLUDE) $(LIB_O) $< -o $@ $(LIBGLUT)
+
+./lib/JLXLCD.o: ./src/JLXLCD.cpp ./include/JLXLCD.h
+	$(CXX) -I$(INCLUDE) -c $< -o ./lib/JLXLCD.o
