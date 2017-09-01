@@ -1,8 +1,28 @@
 #ifndef _JLXLCD_H_
 #define _JLXLCD_H_
-#include <GL/glut.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+
+#ifdef _WIN32
+#   error "unsupport compiler"
+#elif __APPLE__
+        #include <GLUT/glut.h>
+        #include <OpenGL/gl.h>
+        #include <OpenGL/glu.h>
+#elif __linux__
+    #include <GL/glut.h>
+    #include <GL/gl.h>
+    #include <GL/glu.h>
+#elif __unix__ // all unices not caught above
+#   error "unsupport compiler"
+#elif defined(_POSIX_VERSION)
+#   error "unsupport compiler"
+#else
+#   error "Unknown compiler"
+#endif
+
+
+
+
+
 struct Image
 {
 	char data[8][128];
